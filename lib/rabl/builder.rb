@@ -71,8 +71,17 @@ module Rabl
     # child(@users => :people) { ... }
     def child(data, options={}, &block)
       return false unless data.present?
+<<<<<<< HEAD
       name, object = data_name(data), data_object(data)
       include_root = object.respond_to?(:each) && @options[:child_root] # child @users
+=======
+      if options[:args]
+        name, object = data_name(data, options[:args]), data_object(data, options[:args])
+      else
+        name, object = data_name(data), data_object(data)
+      end
+      include_root = !is_object?(object) && @options[:child_root] # child @users
+>>>>>>> b09b2de... Added ability to pass arguments to child node methods
       object = { object => name } if data.respond_to?(:each_pair) && object # child :users => :people
       @_result[name] = self.object_to_hash(object, :root => include_root, &block) if resolve_condition(options)
     end
