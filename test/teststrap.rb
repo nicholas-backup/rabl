@@ -16,7 +16,6 @@ module Kernel
 end unless Kernel.respond_to? :silence_warnings
 
 silence_warnings do
-  require 'ruby-debug'
   require 'riot'
   require 'riot/rr'
   require 'mongo'
