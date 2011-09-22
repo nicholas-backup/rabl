@@ -19,13 +19,8 @@ module Rabl
     def data_name(data, args=[])
       return nil unless data # nil or false
       return data.values.first if data.is_a?(Hash) # @user => :user
-<<<<<<< HEAD
-      data = @_object.send(data) if data.is_a?(Symbol) && @_object # :address
-      if data.respond_to?(:first) && data.first.respond_to?(:valid?)
-=======
       data = @_object.send(data, *args) if data.is_a?(Symbol) && @_object # :address
-      if data.respond_to?(:first)
->>>>>>> b09b2de... Added ability to pass arguments to child node methods
+      if data.respond_to?(:first) && data.first.respond_to?(:valid?)
         data_name(data.first).pluralize
       else # actual data object
         object_name = @_collection_name.to_s.singularize if @_collection_name
